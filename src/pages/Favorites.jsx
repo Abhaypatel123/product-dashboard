@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import ProductCard from "../components/ProductCard";
+import { useSelector } from 'react-redux';
+import ProductCard from '../components/ProductCard';
 
 export default function Favorites() {
   const { items } = useSelector((s) => s.products);

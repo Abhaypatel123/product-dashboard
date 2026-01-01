@@ -1,13 +1,13 @@
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: "#4f46e5",        // indigo-600
-        primaryDark: "#4338ca",    // indigo-700
-        secondary: "#0f172a",      // slate-900
-        accent: "#22c55e",         // green-500
-        muted: "#64748b",          // slate-500
+        primary: "#4f46e5",
+        primaryDark: "#4338ca",
+        secondary: "#0f172a",
+        accent: "#22c55e",
+        muted: "#64748b",
       },
     },
   },

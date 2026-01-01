@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorite } from "../features/favorites/favoritesSlice";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleFavorite } from '../features/favorites/favoritesSlice';
+import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -9,16 +9,13 @@ export default function ProductCard({ product }) {
 
   return (
     <div className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      
       {/* Favorite Button */}
       <button
         onClick={() => dispatch(toggleFavorite(product.id))}
         className="absolute right-3 top-3 z-10 rounded-full bg-white/90 p-2 shadow hover:scale-110 transition"
         aria-label="Toggle Favorite"
       >
-        <span className="text-lg">
-          {isFav ? "❤️" : "🤍"}
-        </span>
+        <span className="text-lg">{isFav ? '❤️' : '🤍'}</span>
       </button>
 
       {/* Image */}
@@ -32,13 +29,9 @@ export default function ProductCard({ product }) {
 
       {/* Content */}
       <div className="mt-4 flex flex-1 flex-col">
-        <h3 className="line-clamp-2 text-sm font-semibold text-slate-800">
-          {product.title}
-        </h3>
+        <h3 className="line-clamp-2 text-sm font-semibold text-slate-800">{product.title}</h3>
 
-        <p className="mt-2 text-lg font-bold text-slate-900">
-          ₹ {product.price}
-        </p>
+        <p className="mt-2 text-lg font-bold text-slate-900">₹ {product.price}</p>
 
         {/* Actions */}
         <div className="mt-auto flex items-center justify-between pt-4">
