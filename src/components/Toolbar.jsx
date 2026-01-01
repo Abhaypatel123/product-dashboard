@@ -38,12 +38,6 @@ export default function Toolbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const clearAllFilters = () => {
-    dispatch(setSearch(''));
-    dispatch(setCategory('All Categories'));
-    dispatch(setSort('Default'));
-  };
-
   const hasActiveFilters = search || category !== 'All Categories' || sort !== 'Default';
 
   return (

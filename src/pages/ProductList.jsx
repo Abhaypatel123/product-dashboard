@@ -1,8 +1,7 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect,  useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../features/products/productsSlice';
 import ProductCard from '../components/ProductCard';
-import { setSearch, setCategory, setSort } from '../features/filters/filtersSlice';
 import { useDebounce } from '../hooks/useDebounce';
 import SkeletonGrid from '../components/SkeletonGrid';
 import Toolbar from '../components/Toolbar';

@@ -1,4 +1,3 @@
-// src/__tests__/pages/ProductList.test.js
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';

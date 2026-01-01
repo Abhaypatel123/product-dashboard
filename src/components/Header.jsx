@@ -3,14 +3,20 @@ import { useSelector } from 'react-redux';
 import { ShoppingBag, Heart, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
+const ICONS = {
+  shoppingBag: ShoppingBag,
+  heart: Heart,
+};
+
 export default function Header() {
   const favCount = useSelector((s) => s.favorites.ids.length);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { to: '/', label: 'Products', icon: ShoppingBag },
-    { to: '/favorites', label: 'Favorites', icon: Heart, badge: favCount },
+    { to: '/', label: 'Products', icon: 'shoppingBag' },
+    { to: '/favorites', label: 'Favorites', icon: 'heart', badge: favCount },
   ];
+
 
   return (
     <>
@@ -37,32 +43,35 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1">
-              {navLinks.map(({ to, label, icon: Icon, badge }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  className={({ isActive }) =>
-                    `group relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
+              {navLinks.map(({ to, label, icon, badge }) => {
+                const Icon = ICONS[icon];
+                return (
+                  <NavLink
+                    key={to}
+                    to={to}
+                    className={({ isActive }) =>
+                      `group relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
                     ${isActive
-                      ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                    }`
-                  }
-                >
-                  <div className="relative">
-                    <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
-                    {badge > 0 && (
-                      <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-rose-500 to-pink-500 shadow-sm">
-                        <span className="text-xs font-semibold text-white">{badge}</span>
-                      </div>
-                    )}
-                  </div>
-                  <span>{label}</span>
-                  <div className="absolute -bottom-1 left-1/2 h-0.5 w-8 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="h-full w-full rounded-full bg-gradient-to-r from-blue-400 to-indigo-400"></div>
-                  </div>
-                </NavLink>
-              ))}
+                        ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 shadow-sm'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      }`
+                    }
+                  >
+                    <div className="relative">
+                      {Icon && <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />}
+                      {badge > 0 && (
+                        <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-rose-500 to-pink-500 shadow-sm">
+                          <span className="text-xs font-semibold text-white">{badge}</span>
+                        </div>
+                      )}
+                    </div>
+                    <span>{label}</span>
+                    <div className="absolute -bottom-1 left-1/2 h-0.5 w-8 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="h-full w-full rounded-full bg-gradient-to-r from-blue-400 to-indigo-400"></div>
+                    </div>
+                  </NavLink>
+                )
+              })}
             </nav>
 
             {/* Mobile Menu Button */}
@@ -96,35 +105,38 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-md animate-slideDown">
             <div className="px-4 py-3">
-              {navLinks.map(({ to, label, icon: Icon, badge }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `flex items-center justify-between px-4 py-3.5 rounded-xl mb-1 text-base font-medium transition-all duration-200
+              {navLinks.map(({ to, label, icon, badge }) => {
+                const Icon = ICONS[icon];
+                return (
+                  <NavLink
+                    key={to}
+                    to={to}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between px-4 py-3.5 rounded-xl mb-1 text-base font-medium transition-all duration-200
                     ${isActive
-                      ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
-                    }`
-                  }
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`flex h-9 w-9 items-center justify-center rounded-lg ${'bg-gray-200'
-                        }`}
-                    >
-                      <Icon className="h-4 w-4" />
+                        ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200'
+                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                      }`
+                    }
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`flex h-9 w-9 items-center justify-center rounded-lg ${'bg-gray-200'
+                          }`}
+                      >
+                        {Icon && <Icon className="h-4 w-4" />}
+                      </div>
+                      <span>{label}</span>
                     </div>
-                    <span>{label}</span>
-                  </div>
-                  {badge > 0 && (
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-rose-500 to-pink-500">
-                      <span className="text-xs font-bold text-white">{badge}</span>
-                    </div>
-                  )}
-                </NavLink>
-              ))}
+                    {badge > 0 && (
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-rose-500 to-pink-500">
+                        <span className="text-xs font-bold text-white">{badge}</span>
+                      </div>
+                    )}
+                  </NavLink>
+                )
+              })}
             </div>
           </div>
         )}
