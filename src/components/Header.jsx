@@ -43,10 +43,9 @@ export default function Header() {
                   to={to}
                   className={({ isActive }) =>
                     `group relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
-                    ${
-                      isActive
-                        ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 shadow-sm'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    ${isActive
+                      ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`
                   }
                 >
@@ -104,18 +103,16 @@ export default function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
                     `flex items-center justify-between px-4 py-3.5 rounded-xl mb-1 text-base font-medium transition-all duration-200
-                    ${
-                      isActive
-                        ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                    ${isActive
+                      ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200'
+                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
                     }`
                   }
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`flex h-9 w-9 items-center justify-center rounded-lg ${
-                        isActive ? 'bg-gray-200' : 'bg-gray-100'
-                      }`}
+                      className={`flex h-9 w-9 items-center justify-center rounded-lg ${'bg-gray-200'
+                        }`}
                     >
                       <Icon className="h-4 w-4" />
                     </div>

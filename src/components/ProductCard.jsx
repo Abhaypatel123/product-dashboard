@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
-  const favs = useSelector((s) => s.favorites.ids);
-  const isFav = favs.includes(product.id);
+  const favs = useSelector((s) => s.favorites?.ids);
+  const isFav = favs?.includes(product.id);
 
   return (
     <div className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
