@@ -4,8 +4,8 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState: {
     search: '',
-    category: 'all',
-    sort: 'asc',
+    category: 'All Categories',
+    sort: 'Default',
   },
   reducers: {
     setSearch: (state, action) => {

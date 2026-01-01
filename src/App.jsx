@@ -9,7 +9,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header />
-
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/favorites" element={<Favorites />} />

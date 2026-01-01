@@ -10,3 +10,7 @@ export const store = configureStore({
     filters: filtersReducer,
   },
 });
+
+store.subscribe(() => {
+  console.log('Redux State:', store.getState());
+});

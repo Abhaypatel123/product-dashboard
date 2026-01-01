@@ -1,9 +1,13 @@
 @import 'tailwindcss';
 
-/* ---- your existing styles BELOW ---- */
-
 :root {
   --color-primary: 79 70 229;
   --color-secondary: 15 23 42;
   --color-accent: 34 197 94;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
