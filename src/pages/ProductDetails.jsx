@@ -31,11 +31,13 @@ export default function ProductDetails() {
   const isFav = favs.includes(productId);
   const [selectedImage, setSelectedImage] = useState(0);
 
+  const error = useSelector((state) => state.products.error);
+
   useEffect(() => {
-    if (!product && !loading) {
+    if (!product && !error) {
       dispatch(fetchProductById(productId));
     }
-  }, [dispatch, productId, product, loading]);
+  }, [dispatch, productId, product, error]);
 
   const productImages = [
     product?.image,
