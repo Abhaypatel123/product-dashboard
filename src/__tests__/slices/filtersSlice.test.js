@@ -1,4 +1,8 @@
-import filtersReducer, { setSearch, setCategory, setSort } from '../../features/filters/filtersSlice';
+import filtersReducer, {
+  setSearch,
+  setCategory,
+  setSort,
+} from '../../features/filters/filtersSlice';
 
 describe('filtersSlice', () => {
   const initialState = {

@@ -17,7 +17,6 @@ export default function Header() {
     { to: '/favorites', label: 'Favorites', icon: 'heart', badge: favCount },
   ];
 
-
   return (
     <>
       {/* Header */}
@@ -51,14 +50,17 @@ export default function Header() {
                     to={to}
                     className={({ isActive }) =>
                       `group relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
-                    ${isActive
+                    ${
+                      isActive
                         ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 shadow-sm'
                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                      }`
+                    }`
                     }
                   >
                     <div className="relative">
-                      {Icon && <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />}
+                      {Icon && (
+                        <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+                      )}
                       {badge > 0 && (
                         <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-gradient-to-r from-rose-500 to-pink-500 shadow-sm">
                           <span className="text-xs font-semibold text-white">{badge}</span>
@@ -70,7 +72,7 @@ export default function Header() {
                       <div className="h-full w-full rounded-full bg-gradient-to-r from-blue-400 to-indigo-400"></div>
                     </div>
                   </NavLink>
-                )
+                );
               })}
             </nav>
 
@@ -114,16 +116,16 @@ export default function Header() {
                     onClick={() => setMobileMenuOpen(false)}
                     className={({ isActive }) =>
                       `flex items-center justify-between px-4 py-3.5 rounded-xl mb-1 text-base font-medium transition-all duration-200
-                    ${isActive
+                    ${
+                      isActive
                         ? 'text-gray-900 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200'
                         : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
-                      }`
+                    }`
                     }
                   >
                     <div className="flex items-center gap-3">
                       <div
-                        className={`flex h-9 w-9 items-center justify-center rounded-lg ${'bg-gray-200'
-                          }`}
+                        className={`flex h-9 w-9 items-center justify-center rounded-lg ${'bg-gray-200'}`}
                       >
                         {Icon && <Icon className="h-4 w-4" />}
                       </div>
@@ -135,7 +137,7 @@ export default function Header() {
                       </div>
                     )}
                   </NavLink>
-                )
+                );
               })}
             </div>
           </div>
