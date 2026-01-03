@@ -40,10 +40,46 @@ export default function Favorites() {
   }
 
   return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-4 gap-4">
-      {favProducts.map((p) => (
-        <ProductCard key={p.id} product={p} />
-      ))}
+    <div className="max-w-7xl mx-auto">
+      <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl mx-6 mt-6 p-8">
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">
+              <span className="flex items-center gap-3">
+                <Heart className="w-10 h-10 text-red-500 fill-red-500" />
+                My Favorite Collection
+              </span>
+            </h1>
+            <p className="text-gray-600 text-lg mb-4">
+              Your curated selection of loved products. Save items you adore for later purchase!
+            </p>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
+                <Heart className="w-5 h-5 text-red-500 fill-red-500" />
+                <span className="font-semibold">{favProducts.length} Items</span>
+              </div>
+              <span className="text-gray-500">Last updated: Today</span>
+            </div>
+          </div>
+          <button className="mt-6 md:mt-0 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105">
+            Share Collection
+          </button>
+        </div>
+      </div>
+      <div className="p-6">
+        <>
+          <h2 className="text-2xl font-bold text-gray-800 mb-8">
+            Your Favorites ({favProducts.length})
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {favProducts.map((p) => (
+              <div key={p.id} className="relative group">
+                <ProductCard product={p} />
+              </div>
+            ))}
+          </div>
+        </>
+      </div>
     </div>
   );
 }
