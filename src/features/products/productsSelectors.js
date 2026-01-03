@@ -8,6 +8,4 @@ export const selectProductById = (state, productId) =>
 export const selectProductsStatus = (state) => selectProductsState(state).status;
 
 export const selectProductsError = (state) => selectProductsState(state).error;
-export const selectProductLoadingById = (state, id) =>
-  state.products.loadingById[id];
-
+export const selectProductLoadingById = (state, id) => state.products.loadingById[id];

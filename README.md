@@ -1,16 +1,51 @@
-# React + Vite
+## Assignment Coverage
+- Product listing with search, filter, and sorting
+- Product detail page with favorites
+- Favorites management via Redux Toolkit
+- Unit tests for reducers and pages
+- Integration tests for core user flows
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 💻 Technologies Used
+- React (Functional Components, Hooks)
+- Tailwind CSS
+- Vite
+- Jest (for testing)
+- redux toolkit (for state management)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Clone the repository:
+git clone  https://github.com/Abhaypatel123/product-dashboard
+cd product-dashboard
 
-## React Compiler
+## node version 
+- **Node.js version:** 22.0.0 or higher  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Install dependencies
+- npm install
 
-## Expanding the ESLint configuration
+## Start the dev server
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## visit on
+http://localhost:5173
+
+## Run ESLint to check for issues:
+npm run lint
+
+## Auto-fix lint issues
+npm run lint:fix
+
+## Format all supported files:
+npm run format
+
+## Run All Tests 
+npm run test
+
+## Run Tests in Watch Mode
+npm run test:watch
+
+## Build for Production
+npm run build
+
+## Deployed on Netlify  
+Live URL: https://e-comm-product.netlify.app

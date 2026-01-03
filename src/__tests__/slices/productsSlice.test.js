@@ -6,6 +6,7 @@ describe('productsSlice', () => {
     items: [],
     status: 'idle',
     error: null,
+    loadingById: {},
   };
 
   test('should return the initial state', () => {

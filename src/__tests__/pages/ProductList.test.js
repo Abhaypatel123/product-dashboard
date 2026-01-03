@@ -60,7 +60,7 @@ describe('ProductList page', () => {
   it('renders "No products found" when list is empty', () => {
     renderPage({ items: [], status: 'succeeded', error: null });
 
-    expect(screen.getByText(/no products found/i)).toBeInTheDocument();
+    expect(screen.getByText(/No products available/i)).toBeInTheDocument();
   });
 
   it('renders product cards when products exist', () => {

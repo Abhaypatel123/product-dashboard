@@ -6,6 +6,10 @@ import ProductCard from '../components/ProductCard';
 import { useDebounce } from '../hooks/useDebounce';
 import SkeletonGrid from '../components/SkeletonGrid';
 import Toolbar from '../components/Toolbar';
+import { Package, Search } from 'lucide-react';
+import { setSearch } from '../features/filters/filtersSlice';
+import { applyProductFilters } from '../utils/applyProductFilters';
+import EmptyState from '../components/EmptyState';
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -25,39 +29,23 @@ export default function ProductList() {
   }, [status, dispatch]);
 
   const filteredProducts = useMemo(() => {
-    let data = [...items];
-
-    if (category && category !== 'All Categories') {
-      data = data.filter((p) => p.category === category);
-    }
-
-    if (debouncedSearch) {
-      data = data.filter((p) => p.title.toLowerCase().includes(debouncedSearch.toLowerCase()));
-    }
-
-    if (sort === 'Price: Low to High') {
-      data.sort((a, b) => a.price - b.price);
-    }
-
-    if (sort === 'Price: High to Low') {
-      data.sort((a, b) => b.price - a.price);
-    }
-
-    return data;
-  }, [items, debouncedSearch, category, sort]);
+    return applyProductFilters(items, {
+      search: search ? debouncedSearch : '',
+      category,
+      sort,
+    });
+  }, [items, search, debouncedSearch, category, sort]);
 
   return (
     <div className="max-w-7xl mx-auto p-6">
       <Toolbar />
-
       {loading && <SkeletonGrid />}
-
       {!loading && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => <ProductCard key={product.id} product={product} />)
           ) : (
-            <p className="col-span-full text-center text-gray-500 text-lg">No products found.</p>
+            <EmptyState search={search} onClear={() => dispatch(setSearch(''))} />
           )}
         </div>
       )}

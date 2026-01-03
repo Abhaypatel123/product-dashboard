@@ -26,13 +26,13 @@ const productsSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || action.error.message;
-      }).
-    addCase(fetchProductById.pending, (state, action) => {
-      state.loadingById[action.meta.arg] = true;
-    })
+      })
+      .addCase(fetchProductById.pending, (state, action) => {
+        state.loadingById[action.meta.arg] = true;
+      })
       .addCase(fetchProductById.fulfilled, (state, action) => {
         state.loadingById[action.payload.id] = false;
-        const exists = state.items.find(p => p.id === action.payload.id);
+        const exists = state.items.find((p) => p.id === action.payload.id);
         if (!exists) state.items.push(action.payload);
       })
       .addCase(fetchProductById.rejected, (state, action) => {

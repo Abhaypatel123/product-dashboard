@@ -12,7 +12,7 @@ export default function ProductCard({ product }) {
       {/* Favorite Button */}
       <button
         onClick={() => dispatch(toggleFavorite(product.id))}
-        className="absolute right-3 top-3 z-10 rounded-full bg-white/90 p-2 shadow hover:scale-110 transition"
+        className="absolute right-3 top-3 z-10 rounded-full bg-white/90 p-2 shadow hover:scale-110 transition cursor-pointer"
         aria-label="Toggle Favorite"
       >
         <span className="text-lg">{isFav ? '❤️' : '🤍'}</span>
@@ -31,7 +31,7 @@ export default function ProductCard({ product }) {
       <div className="mt-4 flex flex-1 flex-col">
         <h3 className="line-clamp-2 text-sm font-semibold text-slate-800">{product.title}</h3>
 
-        <p className="mt-2 text-lg font-bold text-slate-900">₹ {product.price}</p>
+        <p className="mt-2 text-lg font-bold text-slate-900">$ {product.price}</p>
 
         {/* Actions */}
         <div className="mt-auto flex items-center justify-between pt-4">

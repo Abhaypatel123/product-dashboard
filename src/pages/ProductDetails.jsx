@@ -1,9 +1,6 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleFavorite } from '../features/favorites/favoritesSlice';
-import { fetchProductById } from '../features/products/productsThunks';
-
 import {
   ChevronLeft,
   Heart,
@@ -20,23 +17,20 @@ import {
   selectProductById,
   selectProductLoadingById,
 } from '../features/products/productsSelectors';
+import { toggleFavorite } from '../features/favorites/favoritesSlice';
+import { fetchProductById } from '../features/products/productsThunks';
 
 export default function ProductDetails() {
   const { id } = useParams();
   const productId = Number(id);
   const dispatch = useDispatch();
-  const product = useSelector((state) =>
-    selectProductById(state, productId)
-  );
-  const loading = useSelector((state) =>
-    Boolean(selectProductLoadingById(state, productId))
-  );
+  const navigate = useNavigate();
+  const product = useSelector((state) => selectProductById(state, productId));
+  const loading = useSelector((state) => Boolean(selectProductLoadingById(state, productId)));
   const favs = useSelector((s) => s.favorites.ids);
   const isFav = favs.includes(productId);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
-  
+
   useEffect(() => {
     if (!product && !loading) {
       dispatch(fetchProductById(productId));
@@ -45,21 +39,15 @@ export default function ProductDetails() {
 
   const productImages = [
     product?.image,
-    `https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800`,
-    `https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&grayscale`,
-    `https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&blur=2`,
+    'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800', // clothing
+    'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800', // accessories
+    'https://images.unsplash.com/photo-1503602642458-232111445657?w=800', // shoes
+    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800', // product lifestyle
   ];
-
-  const handleAddToCart = () => {
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 2000);
-  };
-
 
   if (loading) {
     return <Loader message="Loading product details..." />;
   }
-
 
   if (!product) {
     return (
@@ -71,13 +59,13 @@ export default function ProductDetails() {
         </div>
         <h2 className="text-xl font-bold text-gray-900 mb-2">Product Not Found</h2>
         <p className="text-gray-600 mb-8 text-sm">The product doesn't exist.</p>
-        <Link
-          to="/"
-          className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 px-5 py-2.5 text-white font-medium hover:shadow-lg transition-all text-sm"
+        <div
+          onClick={() => navigate(-1)}
+          className="flex cursor-pointer items-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 px-5 py-2.5 text-white font-medium hover:shadow-lg transition-all text-sm"
         >
           <ChevronLeft className="h-4 w-4" />
           Back to Products
-        </Link>
+        </div>
       </div>
     );
   }
@@ -85,29 +73,16 @@ export default function ProductDetails() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Navigation */}
-      <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <div className="border-b border-gray-200 bg-white/80">
         <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            <Link
-              to="/"
-              className="group flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm font-medium"
+            <button
+              onClick={() => navigate(-1)}
+              className="group cursor-pointer flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm font-medium"
             >
               <ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
               Back
-            </Link>
-            <div className="flex items-center gap-3">
-              <button className="rounded-full p-2 hover:bg-gray-100 transition-colors">
-                <Share2 className="h-4 w-4 text-gray-600" />
-              </button>
-              <button
-                onClick={() => dispatch(toggleFavorite(product.id))}
-                className="relative rounded-full p-2 hover:bg-gray-100 transition-colors"
-              >
-                <Heart
-                  className={`h-4 w-4 ${isFav ? 'fill-red-500 text-red-500' : 'text-gray-600'}`}
-                />
-              </button>
-            </div>
+            </button>
           </div>
         </div>
       </div>
@@ -122,10 +97,11 @@ export default function ProductDetails() {
               <div className="absolute right-3 top-3 z-10">
                 <button
                   onClick={() => dispatch(toggleFavorite(product.id))}
-                  className={`flex h-10 w-10 items-center justify-center rounded-full shadow-md transition-all hover:scale-110 ${isFav
-                    ? 'bg-gradient-to-r from-red-500 to-pink-500 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
-                    }`}
+                  className={`flex h-10 w-10 items-center cursor-pointer justify-center rounded-full shadow-md transition-all hover:scale-110 ${
+                    isFav
+                      ? 'bg-gradient-to-r from-red-500 to-pink-500 text-white'
+                      : 'bg-white text-gray-600 hover:bg-gray-50'
+                  }`}
                 >
                   <Heart className={`h-4 w-4 ${isFav ? 'fill-white' : ''}`} />
                 </button>
@@ -146,10 +122,11 @@ export default function ProductDetails() {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`flex-1 overflow-hidden rounded-xl border transition-all hover:scale-105 ${selectedImage === index
-                    ? 'border-blue-500 shadow-md shadow-blue-500/20'
-                    : 'border-gray-200'
-                    }`}
+                  className={`flex-1 overflow-hidden rounded-xl border transition-all hover:scale-105 ${
+                    selectedImage === index
+                      ? 'border-blue-500 shadow-md shadow-blue-500/20'
+                      : 'border-gray-200'
+                  }`}
                 >
                   <div className="flex h-20 items-center justify-center bg-gradient-to-br from-gray-50 to-white p-3">
                     <img
@@ -175,10 +152,11 @@ export default function ProductDetails() {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`h-3 w-3 ${i < Math.round(product.rating.rate)
-                        ? 'fill-amber-400 text-amber-400'
-                        : 'fill-gray-200 text-gray-200'
-                        }`}
+                      className={`h-3 w-3 ${
+                        i < Math.round(product.rating.rate)
+                          ? 'fill-amber-400 text-amber-400'
+                          : 'fill-gray-200 text-gray-200'
+                      }`}
                     />
                   ))}
                 </div>
@@ -213,66 +191,15 @@ export default function ProductDetails() {
               <p className="text-sm leading-relaxed text-gray-700">{product.description}</p>
             </div>
 
-            {/* Quantity Selector */}
-            <div className="mb-6">
-              <h3 className="mb-2 text-base font-semibold text-gray-900">Quantity</h3>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center rounded-xl border border-gray-200 bg-white">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-l-xl"
-                  >
-                    −
-                  </button>
-                  <span className="w-12 text-center text-lg font-bold text-gray-900">
-                    {quantity}
-                  </span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-r-xl"
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="text-sm text-gray-600">
-                  Total:{' '}
-                  <span className="text-lg font-bold text-gray-900">
-                    ${(product.price * quantity).toFixed(2)}
-                  </span>
-                </div>
-              </div>
-            </div>
-
             {/* Action Buttons */}
             <div className="mb-8 flex flex-col gap-3 sm:flex-row">
               <button
-                onClick={handleAddToCart}
-                className={`flex-1 rounded-xl px-6 py-3 font-semibold transition-all ${addedToCart
-                  ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white'
-                  : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg hover:shadow-blue-500/30'
-                  }`}
-              >
-                <div className="flex items-center justify-center gap-2 text-sm">
-                  {addedToCart ? (
-                    <>
-                      <Check className="h-4 w-4" />
-                      Added to Cart
-                    </>
-                  ) : (
-                    <>
-                      <ShoppingBag className="h-4 w-4" />
-                      Add to Cart
-                    </>
-                  )}
-                </div>
-              </button>
-
-              <button
                 onClick={() => dispatch(toggleFavorite(product.id))}
-                className={`flex-1 rounded-xl border-2 px-6 py-3 font-semibold transition-all text-sm ${isFav
-                  ? 'border-red-500 bg-gradient-to-r from-red-50 to-pink-50 text-red-600 hover:from-red-100 hover:to-pink-100'
-                  : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:bg-gray-50'
-                  }`}
+                className={`flex-1 cursor-pointer rounded-xl border-2 px-6 py-3 font-semibold transition-all text-sm ${
+                  isFav
+                    ? 'border-red-500 bg-gradient-to-r from-red-50 to-pink-50 text-red-600 hover:from-red-100 hover:to-pink-100'
+                    : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400 hover:bg-gray-50'
+                }`}
               >
                 <div className="flex items-center justify-center gap-2">
                   <Heart className={`h-4 w-4 ${isFav ? 'fill-red-500' : ''}`} />

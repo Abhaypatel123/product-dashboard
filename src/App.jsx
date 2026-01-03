@@ -4,6 +4,7 @@ import Favorites from './pages/Favorites';
 import ProductDetails from './pages/ProductDetails';
 import Header from './components/Header';
 import './index.css';
+import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
@@ -11,8 +12,11 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<ProductList />} />
+        <Route path="/products" element={<ProductList />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        {/* 404 Not Found */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
